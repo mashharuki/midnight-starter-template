@@ -9,4 +9,4 @@ compact update
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-npm i -g pnpm
+corepack enable pnpm

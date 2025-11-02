@@ -46,6 +46,7 @@ jspm_packages/
 # VSCode
 .vscode/*
 !.vscode/settings.json
+!.vscode/mcp.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json

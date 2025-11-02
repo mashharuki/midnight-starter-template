@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run copy-contract-keys && tsc -b && vite build",
+    "build": "pnpm run copy-contract-keys && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "copy-contract-keys": "mkdir -p ./public/midnight/counter/keys && mkdir -p ./public/midnight/counter/zkir && cp -r ../counter-contract/dist/managed/counter/keys/* ./public/midnight/counter/keys && cp -r ../counter-contract/dist/managed/counter/zkir/* ./public/midnight/counter/zkir"
   },
   "dependencies": {
-    "@meshsdk/counter-contract": "*",
+    "@meshsdk/counter-contract": "workspace:*",
     "@meshsdk/midnight-core": "^0.0.6",
     "@meshsdk/midnight-react": "^0.0.6",
     "@radix-ui/react-dialog": "^1.1.14",
