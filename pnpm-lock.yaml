@@ -217,9 +217,48 @@ importers:
       '@meshsdk/board-contract':
         specifier: workspace:*
         version: link:../bulletin-board
+      '@midnight-ntwrk/compact-runtime':
+        specifier: 0.8.1
+        version: 0.8.1
+      '@midnight-ntwrk/ledger':
+        specifier: 4.0.0
+        version: 4.0.0
+      '@midnight-ntwrk/midnight-js-contracts':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-http-client-proof-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-indexer-public-data-provider':
+        specifier: 2.0.2
+        version: 2.0.2(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@midnight-ntwrk/midnight-js-level-private-state-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-network-id':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-node-zk-config-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-types':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-utils':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/wallet':
+        specifier: 5.0.0
+        version: 5.0.0
+      '@midnight-ntwrk/wallet-api':
+        specifier: 5.0.0
+        version: 5.0.0(rxjs@7.8.2)
       '@midnight-ntwrk/wallet-sdk-hd':
         specifier: ^2.0.0
         version: 2.0.0
+      '@midnight-ntwrk/zswap':
+        specifier: 4.0.0
+        version: 4.0.0
       bip32:
         specifier: ^5.0.0-rc.0
         version: 5.0.0(typescript@5.8.3)
@@ -229,6 +268,18 @@ importers:
       effect:
         specifier: ^3.16.16
         version: 3.18.4
+      pino:
+        specifier: 9.7.0
+        version: 9.7.0
+      pino-pretty:
+        specifier: 13.0.0
+        version: 13.0.0
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
+      ws:
+        specifier: 8.18.2
+        version: 8.18.2
 
   counter-cli:
     dependencies:
@@ -238,9 +289,48 @@ importers:
       '@meshsdk/counter-contract':
         specifier: workspace:*
         version: link:../counter-contract
+      '@midnight-ntwrk/compact-runtime':
+        specifier: 0.8.1
+        version: 0.8.1
+      '@midnight-ntwrk/ledger':
+        specifier: 4.0.0
+        version: 4.0.0
+      '@midnight-ntwrk/midnight-js-contracts':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-http-client-proof-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-indexer-public-data-provider':
+        specifier: 2.0.2
+        version: 2.0.2(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@midnight-ntwrk/midnight-js-level-private-state-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-network-id':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-node-zk-config-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-types':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-utils':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/wallet':
+        specifier: 5.0.0
+        version: 5.0.0
+      '@midnight-ntwrk/wallet-api':
+        specifier: 5.0.0
+        version: 5.0.0(rxjs@7.8.2)
       '@midnight-ntwrk/wallet-sdk-hd':
         specifier: ^2.0.0
         version: 2.0.0
+      '@midnight-ntwrk/zswap':
+        specifier: 4.0.0
+        version: 4.0.0
       bip32:
         specifier: ^5.0.0-rc.0
         version: 5.0.0(typescript@5.8.3)
@@ -250,6 +340,18 @@ importers:
       effect:
         specifier: ^3.16.16
         version: 3.18.4
+      pino:
+        specifier: 9.7.0
+        version: 9.7.0
+      pino-pretty:
+        specifier: 13.0.0
+        version: 13.0.0
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
+      ws:
+        specifier: 8.18.2
+        version: 8.18.2
 
   counter-contract: {}
 
@@ -264,6 +366,30 @@ importers:
       '@meshsdk/midnight-react':
         specifier: ^0.0.6
         version: 0.0.6(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(tailwindcss@4.1.16)
+      '@midnight-ntwrk/compact-runtime':
+        specifier: 0.8.1
+        version: 0.8.1
+      '@midnight-ntwrk/ledger':
+        specifier: 4.0.0
+        version: 4.0.0
+      '@midnight-ntwrk/midnight-js-contracts':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-indexer-public-data-provider':
+        specifier: 2.0.2
+        version: 2.0.2(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@midnight-ntwrk/midnight-js-level-private-state-provider':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-network-id':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/midnight-js-types':
+        specifier: 2.0.2
+        version: 2.0.2
+      '@midnight-ntwrk/zswap':
+        specifier: 4.0.0
+        version: 4.0.0
       '@radix-ui/react-dialog':
         specifier: ^1.1.14
         version: 1.1.15(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -300,6 +426,9 @@ importers:
       react-router-dom:
         specifier: 6.17.0
         version: 6.17.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1

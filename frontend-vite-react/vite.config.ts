@@ -10,7 +10,9 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   define: {
-    "process.env.NODE_ENV": JSON.stringify(mode === "production" ? "production" : "development"),
+    "process.env.NODE_ENV": JSON.stringify(
+      mode === "production" ? "production" : "development"
+    ),
     "process.env": {},
     global: "globalThis",
   },
@@ -33,6 +35,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "isomorphic-ws": path.resolve(__dirname, "./src/shims/isomorphic-ws.ts"),
       // Add any other aliases you need
     },
   },
