@@ -19,7 +19,7 @@ export default defineConfig({
   mode: "node",
   test: {
     deps: {
-      interopDefault: true
+      interopDefault: true,
     },
     globals: true,
     environment: "node",
@@ -33,13 +33,13 @@ export default defineConfig({
         branches: 50,
         functions: 73,
         lines: 72,
-        statements: -269
-      }
+        statements: -269,
+      },
     },
-    reporters: ["default", ["junit", { outputFile: "reports/report.xml" }]]
+    reporters: ["default", ["junit", { outputFile: "reports/report.xml" }]],
   },
   resolve: {
     extensions: [".ts", ".js"],
-    conditions: ["import", "node", "default"]
-  }
+    conditions: ["import", "node", "default"],
+  },
 });

@@ -1,17 +1,17 @@
-import type { PropsWithChildren } from 'react';
-import { createContext, useMemo } from 'react';
-import { type Logger } from 'pino';
+import type { PropsWithChildren } from "react";
+import { createContext, useMemo } from "react";
+import { type Logger } from "pino";
 
-import type { DeployedAPIProvider } from './counter-deployment-class';
-import { useLocalState } from '../hooks/use-localStorage';
-import { DeployedTemplateManager } from './counter-deployment-class';
-import { useProviders } from '../hooks';
-import { ContractAddress } from '@midnight-ntwrk/compact-runtime';
+import type { DeployedAPIProvider } from "./counter-deployment-class";
+import { useLocalState } from "../hooks/use-localStorage";
+import { DeployedTemplateManager } from "./counter-deployment-class";
+import { useProviders } from "../hooks";
+import { ContractAddress } from "@midnight-ntwrk/compact-runtime";
 
 export const DeployedProviderContext = createContext<DeployedAPIProvider | undefined>(undefined);
 
 export type DeployedProviderProps = PropsWithChildren<{
-  logger: Logger;  
+  logger: Logger;
   contractAddress: ContractAddress;
 }>;
 
@@ -23,8 +23,6 @@ export const DeployedProvider = ({ logger, contractAddress, children }: Deployed
   }, [logger, localState, providers?.providers]);
 
   return (
-    <DeployedProviderContext.Provider value={manager}>
-      {children}
-    </DeployedProviderContext.Provider>
+    <DeployedProviderContext.Provider value={manager}>{children}</DeployedProviderContext.Provider>
   );
 };

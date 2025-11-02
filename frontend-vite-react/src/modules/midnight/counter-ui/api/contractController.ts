@@ -1,16 +1,30 @@
-import { type Logger } from 'pino';
-import { type ContractAddress } from '@midnight-ntwrk/compact-runtime';
-import { type Observable } from 'rxjs';
-import * as Rx from 'rxjs';
-import { CounterContract, CounterPrivateStateId, CounterProviders, DeployedCounterContract, emptyState, UserAction, type DerivedState } from './common-types';
-import { Contract, ledger, CounterPrivateState, createPrivateState, witnesses } from '@meshsdk/counter-contract';
-import { deployContract, findDeployedContract } from '@midnight-ntwrk/midnight-js-contracts';
-import { PrivateStateProvider } from '@midnight-ntwrk/midnight-js-types';
+import { type Logger } from "pino";
+import { type ContractAddress } from "@midnight-ntwrk/compact-runtime";
+import { type Observable } from "rxjs";
+import * as Rx from "rxjs";
+import {
+  CounterContract,
+  CounterPrivateStateId,
+  CounterProviders,
+  DeployedCounterContract,
+  emptyState,
+  UserAction,
+  type DerivedState,
+} from "./common-types";
+import {
+  Contract,
+  ledger,
+  CounterPrivateState,
+  createPrivateState,
+  witnesses,
+} from "@meshsdk/counter-contract";
+import { deployContract, findDeployedContract } from "@midnight-ntwrk/midnight-js-contracts";
+import { PrivateStateProvider } from "@midnight-ntwrk/midnight-js-types";
 
 export const counterContractInstance: CounterContract = new Contract(witnesses);
 
 export interface ContractControllerInterface {
-  readonly deployedContractAddress: ContractAddress;   
+  readonly deployedContractAddress: ContractAddress;
   readonly state$: Observable<DerivedState>;
   increment: () => Promise<void>;
 }
@@ -25,13 +39,13 @@ export class ContractController implements ContractControllerInterface {
     public readonly contractPrivateStateId: typeof CounterPrivateStateId,
     public readonly deployedContract: DeployedCounterContract,
     public readonly providers: CounterProviders,
-    private readonly logger: Logger,
+    private readonly logger: Logger
   ) {
     const combine = (_acc: DerivedState, value: DerivedState): DerivedState => {
       return {
         round: value.round,
         privateState: value.privateState,
-        turns: value.turns,        
+        turns: value.turns,
       };
     };
     this.deployedContractAddress = deployedContract.deployTxData.public.contractAddress;
@@ -40,13 +54,18 @@ export class ContractController implements ContractControllerInterface {
     this.state$ = Rx.combineLatest(
       [
         providers.publicDataProvider
-          .contractStateObservable(this.deployedContractAddress, { type: 'all' })
+          .contractStateObservable(this.deployedContractAddress, { type: "all" })
           .pipe(Rx.map((contractState) => ledger(contractState.data))),
         Rx.concat(
           Rx.from(
-            Rx.defer(() => providers.privateStateProvider.get(contractPrivateStateId) as Promise<CounterPrivateState>),
+            Rx.defer(
+              () =>
+                providers.privateStateProvider.get(
+                  contractPrivateStateId
+                ) as Promise<CounterPrivateState>
+            )
           ),
-          this.privateStates$,
+          this.privateStates$
         ),
         Rx.concat(Rx.of<UserAction>({ increment: undefined }), this.turns$),
       ],
@@ -57,25 +76,25 @@ export class ContractController implements ContractControllerInterface {
           turns: userActions,
         };
         return result;
-      },
+      }
     ).pipe(
       Rx.scan(combine, emptyState),
       Rx.retry({
         // sometimes websocket fails, if want to add attempts, include count in the object
         delay: 500,
-      }),
+      })
     );
   }
 
   async increment(): Promise<void> {
-    this.logger?.info('incrementing counter');
-    this.turns$.next({ increment: 'incrementinng the counter' });
+    this.logger?.info("incrementing counter");
+    this.turns$.next({ increment: "incrementinng the counter" });
 
     try {
       const txData = await this.deployedContract.callTx.increment();
       this.logger?.trace({
         increment: {
-          message: 'incrementing the counter - blockchain info',
+          message: "incrementing the counter - blockchain info",
           txHash: txData.public.txHash,
           blockHeight: txData.public.blockHeight,
         },
@@ -92,21 +111,24 @@ export class ContractController implements ContractControllerInterface {
   }
 
   static async deploy(
-    contractPrivateStateId: typeof CounterPrivateStateId,    
+    contractPrivateStateId: typeof CounterPrivateStateId,
     providers: CounterProviders,
-    logger: Logger,
+    logger: Logger
   ): Promise<ContractController> {
     logger.info({
       deployContract: {
         action: "Deploying contract",
-        contractPrivateStateId, 
-        providers       
+        contractPrivateStateId,
+        providers,
       },
-    });    
+    });
     const deployedContract = await deployContract(providers, {
       privateStateId: contractPrivateStateId,
       contract: counterContractInstance,
-      initialPrivateState: await ContractController.getPrivateState(contractPrivateStateId, providers.privateStateProvider),      
+      initialPrivateState: await ContractController.getPrivateState(
+        contractPrivateStateId,
+        providers.privateStateProvider
+      ),
     });
 
     logger.trace({
@@ -121,10 +143,10 @@ export class ContractController implements ContractControllerInterface {
   }
 
   static async join(
-    contractPrivateStateId: typeof CounterPrivateStateId,   
+    contractPrivateStateId: typeof CounterPrivateStateId,
     providers: CounterProviders,
     contractAddress: ContractAddress,
-    logger: Logger,
+    logger: Logger
   ): Promise<ContractController> {
     logger.info({
       joinContract: {
@@ -138,7 +160,10 @@ export class ContractController implements ContractControllerInterface {
       contractAddress,
       contract: counterContractInstance,
       privateStateId: contractPrivateStateId,
-      initialPrivateState: await ContractController.getPrivateState(contractPrivateStateId, providers.privateStateProvider),
+      initialPrivateState: await ContractController.getPrivateState(
+        contractPrivateStateId,
+        providers.privateStateProvider
+      ),
     });
 
     logger.trace({
@@ -154,19 +179,22 @@ export class ContractController implements ContractControllerInterface {
 
   private static async getPrivateState(
     counterPrivateStateId: typeof CounterPrivateStateId,
-    privateStateProvider: PrivateStateProvider<typeof CounterPrivateStateId, CounterPrivateState>,
+    privateStateProvider: PrivateStateProvider<typeof CounterPrivateStateId, CounterPrivateState>
   ): Promise<CounterPrivateState> {
     const existingPrivateState = await privateStateProvider.get(counterPrivateStateId);
-    const initialState = await this.getOrCreateInitialPrivateState(counterPrivateStateId, privateStateProvider);
+    const initialState = await this.getOrCreateInitialPrivateState(
+      counterPrivateStateId,
+      privateStateProvider
+    );
     return existingPrivateState ?? initialState;
   }
 
   static async getOrCreateInitialPrivateState(
     counterPrivateStateId: typeof CounterPrivateStateId,
-    privateStateProvider: PrivateStateProvider<typeof CounterPrivateStateId, CounterPrivateState>,
+    privateStateProvider: PrivateStateProvider<typeof CounterPrivateStateId, CounterPrivateState>
   ): Promise<CounterPrivateState> {
     let state = await privateStateProvider.get(counterPrivateStateId);
-    
+
     if (state === null) {
       state = this.createPrivateState(0);
       await privateStateProvider.set(counterPrivateStateId, state);
@@ -174,7 +202,7 @@ export class ContractController implements ContractControllerInterface {
     return state;
   }
 
-  private static createPrivateState(value: number): CounterPrivateState {    
+  private static createPrivateState(value: number): CounterPrivateState {
     return createPrivateState(value);
   }
 }

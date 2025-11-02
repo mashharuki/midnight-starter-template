@@ -12,7 +12,8 @@
     "dev:undeployed-instances": "pnpm --filter counter-cli run prepare-standalone",
     "dev:frontend": "pnpm --filter frontend-vite-react run dev",
     "start-app-testnet": "concurrently \"pnpm run dev:proof-server\" \"pnpm run dev:frontend\"",
-    "start-app-undeployed": "pnpm run dev:frontend"
+    "start-app-undeployed": "pnpm run dev:frontend",
+    "format": "pnpm exec biome format --write ."
   },
   "engines": {
     "node": ">=18",
@@ -23,6 +24,7 @@
     "@eslint/js": "^9.28.0",
     "@types/node": "^22.15.29",
     "@types/ws": "^8.18.1",
+    "@biomejs/biome": "^1.9.4",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
     "concurrently": "^9.2.0",

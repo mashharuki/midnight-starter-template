@@ -1,6 +1,6 @@
-import type { Logger } from 'pino';
+import type { Logger } from "pino";
 
-export interface LocalStorageProps {    
+export interface LocalStorageProps {
   readonly addContract: (contract: string) => void;
   readonly getContracts: () => string[];
   // readonly getContractPrivateId: (contract: string) => string | null;
@@ -8,18 +8,18 @@ export interface LocalStorageProps {
 }
 
 export class LocalStorage implements LocalStorageProps {
-  constructor(private readonly logger: Logger) {}  
+  constructor(private readonly logger: Logger) {}
 
   addContract(contract: string): void {
     this.logger.trace(`Adding contract ${contract}`);
-    const item = window.localStorage.getItem('counter_contracts');    
+    const item = window.localStorage.getItem("counter_contracts");
     const contracts: string[] = item ? JSON.parse(item) : [];
     const updatedContracts = Array.from(new Set([...contracts, contract]));
-    window.localStorage.setItem('counter_contracts', JSON.stringify(updatedContracts));
+    window.localStorage.setItem("counter_contracts", JSON.stringify(updatedContracts));
   }
 
   getContracts(): string[] {
-    const item = window.localStorage.getItem('counter_contracts');    
+    const item = window.localStorage.getItem("counter_contracts");
     const contracts: string[] = item ? JSON.parse(item) : [];
     return Array.from<string>(new Set([...contracts]));
   }

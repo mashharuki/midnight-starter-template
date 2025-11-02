@@ -9,12 +9,12 @@
     "build": {
       "dependsOn": ["^build", "compact"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
-    },    
+    },
     "test": {
       "dependsOn": ["compact", "^build"]
-    },  
+    },
     "lint": {
       "dependsOn": ["compact", "^build"]
-    }  
+    }
   }
 }

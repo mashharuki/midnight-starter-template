@@ -92,9 +92,7 @@ describe("BBoard smart contract", () => {
   it("lets a different user post a message after taking down the first", () => {
     const simulator = createSimulator();
     const caller = p2;
-    simulator
-      .as("p1")
-      .post("Remember, the past need not become our future as well.");
+    simulator.as("p1").post("Remember, the past need not become our future as well.");
     expect(() => simulator.as("p1").takeDown(caller)).toThrow(
       "failed assert: Attempted to take down post, but not the current poster"
     );
@@ -128,18 +126,16 @@ describe("BBoard smart contract", () => {
   it("doesn't let different users post twice", () => {
     const simulator = createSimulator();
     simulator.as("p1").post("Ash fell from the sky");
-    expect(() =>
-      simulator.as("p2").post("I am, unfortunately, the hero of ages.")
-    ).toThrow("failed assert: Attempted to post to an occupied board");
+    expect(() => simulator.as("p2").post("I am, unfortunately, the hero of ages.")).toThrow(
+      "failed assert: Attempted to post to an occupied board"
+    );
   });
 
   it("doesn't let users take down someone elses posts", () => {
     const simulator = createSimulator();
     simulator
       .as("p1")
-      .post(
-        "Sometimes a hypocrite is nothing more than a man in the process of changing."
-      );
+      .post("Sometimes a hypocrite is nothing more than a man in the process of changing.");
     expect(() => simulator.as("p2").takeDown()).toThrow(
       "failed assert: Attempted to take down post, but not the current poster"
     );

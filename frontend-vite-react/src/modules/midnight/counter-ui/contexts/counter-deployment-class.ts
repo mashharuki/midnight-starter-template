@@ -1,17 +1,11 @@
-import {
-  type CounterProviders,
-  CounterPrivateStateId,
-} from "../api/common-types";
+import { type CounterProviders, CounterPrivateStateId } from "../api/common-types";
 import { type ContractAddress } from "@midnight-ntwrk/compact-runtime";
 import { BehaviorSubject } from "rxjs";
 import { type Logger } from "pino";
 import { type LocalStorageProps } from "./counter-localStorage-class";
-import {
-  ContractController,
-  ContractControllerInterface,
-} from "../api/contractController";
+import { ContractController, ContractControllerInterface } from "../api/contractController";
 
-export type ContractDeployment =  
+export type ContractDeployment =
   | InProgressContractDeployment
   | DeployedContract
   | FailedContractDeployment;
@@ -38,7 +32,7 @@ export interface ContractFollow {
   address?: ContractAddress;
 }
 
-export interface DeployedAPIProvider {  
+export interface DeployedAPIProvider {
   readonly joinContract: () => ContractFollow;
   readonly deployContract: () => Promise<ContractFollow>;
 }
@@ -46,7 +40,7 @@ export interface DeployedAPIProvider {
 export class DeployedTemplateManager implements DeployedAPIProvider {
   constructor(
     private readonly logger: Logger,
-    private readonly localState: LocalStorageProps,    
+    private readonly localState: LocalStorageProps,
     private readonly contractAddress: ContractAddress,
     private readonly providers?: CounterProviders
   ) {}

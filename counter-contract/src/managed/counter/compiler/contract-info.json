@@ -3,17 +3,13 @@
     {
       "name": "increment",
       "pure": false,
-      "arguments": [
-      ],
+      "arguments": [],
       "result-type": {
         "type-name": "Tuple",
-        "types": [
-        ]
+        "types": []
       }
     }
   ],
-  "witnesses": [
-  ],
-  "contracts": [
-  ]
+  "witnesses": [],
+  "contracts": []
 }

@@ -1,8 +1,5 @@
 import { CounterSimulator, logger } from "./simulators/counter-simulator.js";
-import {
-  NetworkId,
-  setNetworkId
-} from "@midnight-ntwrk/midnight-js-network-id";
+import { NetworkId, setNetworkId } from "@midnight-ntwrk/midnight-js-network-id";
 import { describe, it, expect } from "vitest";
 
 setNetworkId(NetworkId.Undeployed);
@@ -15,7 +12,7 @@ describe("Counter smart contract", () => {
     expect(initialLedgerState).toEqual(initialLedgerState);
     logger.info({
       section: "Generates initial ledger state",
-      state: initialLedgerState
+      state: initialLedgerState,
     });
   });
 
@@ -26,7 +23,7 @@ describe("Counter smart contract", () => {
     const initialPrivateState = simulator.getPrivateState();
     logger.info({
       section: "Initial Private State",
-      private_state: initialPrivateState
+      private_state: initialPrivateState,
     });
     expect(initialPrivateState).toEqual({ privateCounter: 0 });
   });

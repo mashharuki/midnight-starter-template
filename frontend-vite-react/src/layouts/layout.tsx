@@ -1,4 +1,4 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink } from "react-router-dom";
 
 export const MainLayout = () => {
   return (
@@ -8,7 +8,7 @@ export const MainLayout = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `font-semibold transition hover:opacity-80 ${isActive ? 'underline' : ''}`
+              `font-semibold transition hover:opacity-80 ${isActive ? "underline" : ""}`
             }
             end
           >
@@ -17,15 +17,15 @@ export const MainLayout = () => {
           <NavLink
             to="/counter"
             className={({ isActive }) =>
-              `font-semibold transition hover:opacity-80 ${isActive ? 'underline' : ''}`
+              `font-semibold transition hover:opacity-80 ${isActive ? "underline" : ""}`
             }
           >
             Counter
-          </NavLink>        
+          </NavLink>
           <NavLink
             to="/wallet-ui"
             className={({ isActive }) =>
-              `font-semibold transition hover:opacity-80 ${isActive ? 'underline' : ''}`
+              `font-semibold transition hover:opacity-80 ${isActive ? "underline" : ""}`
             }
           >
             Wallet UI

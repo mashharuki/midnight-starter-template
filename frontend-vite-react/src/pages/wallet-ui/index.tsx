@@ -52,26 +52,15 @@ export function WalletUI() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-3">
-                <Button 
-                  variant="outline" 
-                  onClick={disconnect}
-                  className="gap-2"
-                >
+                <Button variant="outline" onClick={disconnect} className="gap-2">
                   <Link2 className="h-4 w-4" />
                   Disconnect
                 </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => setOpen(true)}
-                  className="gap-2"
-                >
+                <Button variant="outline" onClick={() => setOpen(true)} className="gap-2">
                   <Wallet className="h-4 w-4" />
                   Open Wallet
                 </Button>
-                <Button 
-                  onClick={() => connectWallet("mnLace")}
-                  className="gap-2"
-                >
+                <Button onClick={() => connectWallet("mnLace")} className="gap-2">
                   <Wallet className="h-4 w-4" />
                   Connect Lace
                 </Button>
@@ -93,8 +82,10 @@ export function WalletUI() {
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Wallet Status</h3>
               <div className="flex items-center gap-2 text-sm">
-                <div className={`h-2 w-2 rounded-full ${hasConnectedWallet ? 'bg-green-500' : 'bg-gray-500'}`} />
-                {hasConnectedWallet ? 'Connected' : 'Disconnected'}
+                <div
+                  className={`h-2 w-2 rounded-full ${hasConnectedWallet ? "bg-green-500" : "bg-gray-500"}`}
+                />
+                {hasConnectedWallet ? "Connected" : "Disconnected"}
               </div>
             </div>
 
@@ -118,36 +109,38 @@ export function WalletUI() {
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Wallet Name</h3>
               <div className="bg-muted px-3 py-2 rounded-md text-sm font-mono">
-                {walletName || 'Not connected'}
+                {walletName || "Not connected"}
               </div>
             </div>
 
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Address</h3>
               <div className="bg-muted px-3 py-2 rounded-md text-sm font-mono break-all">
-                {address || 'Not connected'}
+                {address || "Not connected"}
               </div>
             </div>
 
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Connection Status</h3>
               <div className="flex items-center gap-2 text-sm">
-                <div className={`h-2 w-2 rounded-full ${connectingWallet ? 'bg-yellow-500' : 'bg-gray-500'}`} />
-                {connectingWallet ? 'Connecting...' : 'Idle'}
+                <div
+                  className={`h-2 w-2 rounded-full ${connectingWallet ? "bg-yellow-500" : "bg-gray-500"}`}
+                />
+                {connectingWallet ? "Connecting..." : "Idle"}
               </div>
             </div>
 
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Coin Public Key</h3>
               <div className="bg-muted px-3 py-2 rounded-md text-sm font-mono break-all">
-                {coinPublicKey || 'Not connected'}
+                {coinPublicKey || "Not connected"}
               </div>
             </div>
 
             <div className="space-y-2">
               <h3 className="text-sm font-medium">Encryption Public Key</h3>
               <div className="bg-muted px-3 py-2 rounded-md text-sm font-mono break-all">
-                {encryptionPublicKey || 'Not connected'}
+                {encryptionPublicKey || "Not connected"}
               </div>
             </div>
 
@@ -158,28 +151,28 @@ export function WalletUI() {
                   <Server className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50" />
                   <div>
                     <div className="text-xs text-muted-foreground">Substrate Node</div>
-                    <div className="truncate">{uris?.substrateNodeUri || 'Not available'}</div>
+                    <div className="truncate">{uris?.substrateNodeUri || "Not available"}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <Server className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50" />
                   <div>
                     <div className="text-xs text-muted-foreground">Indexer (REST)</div>
-                    <div className="truncate">{uris?.indexerUri || 'Not available'}</div>
+                    <div className="truncate">{uris?.indexerUri || "Not available"}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <Server className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50" />
                   <div>
                     <div className="text-xs text-muted-foreground">Indexer (WebSocket)</div>
-                    <div className="truncate">{uris?.indexerWsUri || 'Not available'}</div>
+                    <div className="truncate">{uris?.indexerWsUri || "Not available"}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <Server className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50" />
                   <div>
                     <div className="text-xs text-muted-foreground">Proof Server</div>
-                    <div className="truncate">{uris?.proverServerUri || 'Not available'}</div>
+                    <div className="truncate">{uris?.proverServerUri || "Not available"}</div>
                   </div>
                 </div>
               </div>

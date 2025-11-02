@@ -2,13 +2,9 @@ import {
   type CircuitContext,
   QueryContext,
   sampleContractAddress,
-  constructorContext
+  constructorContext,
 } from "@midnight-ntwrk/compact-runtime";
-import {
-  Contract,
-  type Ledger,
-  ledger
-} from "../../managed/counter/contract/index.cjs";
+import { Contract, type Ledger, ledger } from "../../managed/counter/contract/index.cjs";
 import { type CounterPrivateState, witnesses } from "../../witnesses.js";
 import { createLogger } from "../../logger-utils.js";
 import { LogicTestingConfig } from "../../config.js";
@@ -25,21 +21,13 @@ export class CounterSimulator {
 
   constructor() {
     this.contract = new Contract<CounterPrivateState>(witnesses);
-    const {
-      currentPrivateState,
-      currentContractState,
-      currentZswapLocalState
-    } = this.contract.initialState(
-      constructorContext({ privateCounter: 0 }, "0".repeat(64))
-    );
+    const { currentPrivateState, currentContractState, currentZswapLocalState } =
+      this.contract.initialState(constructorContext({ privateCounter: 0 }, "0".repeat(64)));
     this.circuitContext = {
       currentPrivateState,
       currentZswapLocalState,
       originalState: currentContractState,
-      transactionContext: new QueryContext(
-        currentContractState.data,
-        sampleContractAddress()
-      )
+      transactionContext: new QueryContext(currentContractState.data, sampleContractAddress()),
     };
   }
 
@@ -53,34 +41,28 @@ export class CounterSimulator {
 
   public increment(): Ledger {
     // Update the current context to be the result of executing the circuit.
-    const circuitResults = this.contract.impureCircuits.increment(
-      this.circuitContext
-    );
+    const circuitResults = this.contract.impureCircuits.increment(this.circuitContext);
     logger.info({
       section: "Circuit Context",
       currentPrivateState: circuitResults.context.currentPrivateState,
       currentZswapLocalState: circuitResults.context.currentZswapLocalState,
       originalState: circuitResults.context.originalState,
-      transactionContext_address:
-        circuitResults.context.transactionContext.address,
+      transactionContext_address: circuitResults.context.transactionContext.address,
       transactionContext_block: circuitResults.context.transactionContext.block,
-      transactionContext_comIndicies:
-        circuitResults.context.transactionContext.comIndicies,
-      transactionContext_effects:
-        circuitResults.context.transactionContext.effects,
-      transactionContext_state: circuitResults.context.transactionContext.state
+      transactionContext_comIndicies: circuitResults.context.transactionContext.comIndicies,
+      transactionContext_effects: circuitResults.context.transactionContext.effects,
+      transactionContext_state: circuitResults.context.transactionContext.state,
     });
     logger.info({
       section: "Circuit Proof Data",
       input: circuitResults.proofData.input,
       output: circuitResults.proofData.output,
-      privateTranscriptOutputs:
-        circuitResults.proofData.privateTranscriptOutputs,
-      publicTranscript: circuitResults.proofData.publicTranscript
+      privateTranscriptOutputs: circuitResults.proofData.privateTranscriptOutputs,
+      publicTranscript: circuitResults.proofData.publicTranscript,
     });
     logger.info({
       section: "Circuit result",
-      result: circuitResults.result
+      result: circuitResults.result,
     });
     this.circuitContext = circuitResults.context;
     return ledger(this.circuitContext.transactionContext.state);

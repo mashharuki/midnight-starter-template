@@ -1,4 +1,4 @@
-import {  
+import {
   ContractDeployment,
   useProviders,
   useDeployedContracts,
@@ -15,19 +15,18 @@ export const useContractSubscription = () => {
   const providers = useProviders();
   const deploy = useDeployedContracts();
 
-  const [counterDeploymentObservable, setCounterDeploymentObservable] =
-    useState<Observable<ContractDeployment> | undefined>(undefined);
+  const [counterDeploymentObservable, setCounterDeploymentObservable] = useState<
+    Observable<ContractDeployment> | undefined
+  >(undefined);
 
-  const [contractDeployment, setContractDeployment] =
-    useState<ContractDeployment>();
-  const [deployedContractAPI, setDeployedContractAPI] =
-    useState<ContractControllerInterface>();
+  const [contractDeployment, setContractDeployment] = useState<ContractDeployment>();
+  const [deployedContractAPI, setDeployedContractAPI] = useState<ContractControllerInterface>();
   const [derivedState, setDerivedState] = useState<DerivedState>();
 
   const onDeploy = async (): Promise<ContractFollow> => {
     const contractFollow = await deploy.deployContract();
     return contractFollow;
-  }
+  };
 
   const onJoin = useCallback(async (): Promise<void> => {
     setCounterDeploymentObservable(deploy.joinContract().observable);
@@ -43,9 +42,7 @@ export const useContractSubscription = () => {
     if (!counterDeploymentObservable) {
       return;
     }
-    const subscription = counterDeploymentObservable.subscribe(
-      setContractDeployment
-    );
+    const subscription = counterDeploymentObservable.subscribe(setContractDeployment);
 
     return () => {
       subscription.unsubscribe();
@@ -57,10 +54,7 @@ export const useContractSubscription = () => {
       return;
     }
 
-    if (
-      contractDeployment.status === "in-progress" ||
-      contractDeployment.status === "failed"
-    ) {
+    if (contractDeployment.status === "in-progress" || contractDeployment.status === "failed") {
       return;
     }
     setDeployedContractAPI((prev) => prev || contractDeployment.api);
@@ -68,18 +62,17 @@ export const useContractSubscription = () => {
 
   useEffect(() => {
     if (deployedContractAPI) {
-      const subscriptionDerivedState =
-        deployedContractAPI.state$.subscribe(setDerivedState);
+      const subscriptionDerivedState = deployedContractAPI.state$.subscribe(setDerivedState);
       return () => {
         subscriptionDerivedState.unsubscribe();
       };
     }
   }, [deployedContractAPI]);
 
-  return {       
+  return {
     deployedContractAPI,
     derivedState,
     onDeploy,
-    providers
+    providers,
   };
 };

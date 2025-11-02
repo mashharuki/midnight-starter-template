@@ -1,22 +1,28 @@
-import path from 'path';
-import { TestEnvironment } from '../test/simulators/test-environment';
-import { nativeToken, tokenType } from '@midnight-ntwrk/ledger';
-import { type Wallet } from '@midnight-ntwrk/wallet-api';
-import type { Resource } from '@midnight-ntwrk/wallet';
-import { ContractAddress } from '@midnight-ntwrk/compact-runtime';
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { type BboardProviders } from '../common-types';
-import * as api from '../api';
-import { currentDir } from '../config';
-import { createLogger } from '../logger-utils';
+import path from "path";
+import { TestEnvironment } from "../test/simulators/test-environment";
+import { nativeToken, tokenType } from "@midnight-ntwrk/ledger";
+import { type Wallet } from "@midnight-ntwrk/wallet-api";
+import type { Resource } from "@midnight-ntwrk/wallet";
+import { ContractAddress } from "@midnight-ntwrk/compact-runtime";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { type BboardProviders } from "../common-types";
+import * as api from "../api";
+import { currentDir } from "../config";
+import { createLogger } from "../logger-utils";
 
 // Update this wallet address with your own undeployed-network wallet
 const my_own_wallet =
-  'mn_shield-addr_undeployed1pldqkwy77d0cw0yspkqxv8urkxhtlm3p9w3aq500wuqhaagaljnsxq93lz69qpm6erjvk7wgun3crpf999wcukywuk5c5ch7jpaf62dm7v4tuepw';
-const logDir = path.resolve(currentDir, '..', 'logs', 'prepare-standalone', `${new Date().toISOString()}.log`);
+  "mn_shield-addr_undeployed1pldqkwy77d0cw0yspkqxv8urkxhtlm3p9w3aq500wuqhaagaljnsxq93lz69qpm6erjvk7wgun3crpf999wcukywuk5c5ch7jpaf62dm7v4tuepw";
+const logDir = path.resolve(
+  currentDir,
+  "..",
+  "logs",
+  "prepare-standalone",
+  `${new Date().toISOString()}.log`
+);
 const logger = await createLogger(logDir);
 
-describe('Prepare Standalone', () => {
+describe("Prepare Standalone", () => {
   let testEnvironment: TestEnvironment;
   let wallet: Wallet & Resource;
   let providers: BboardProviders;
@@ -42,10 +48,10 @@ describe('Prepare Standalone', () => {
       wallet = await testEnvironment.getWallet();
       providers = await api.configureProviders(wallet, testConfiguration.dappConfig);
       keepAliveInterval = setInterval(() => {
-        console.log('Keeping container alive...');
+        console.log("Keeping container alive...");
       }, 60000); // every 60 seconds
     },
-    1000 * 60 * 45,
+    1000 * 60 * 45
   );
 
   afterAll(
@@ -58,11 +64,11 @@ describe('Prepare Standalone', () => {
         // ignore
       }
     },
-    1000 * 60 * 60 * 24 * 7,
+    1000 * 60 * 60 * 24 * 7
   );
 
-  it('Initialize standalone', async () => {
+  it("Initialize standalone", async () => {
     await sendNativeToken(my_own_wallet, 10000n * 1000000n);
-    logger.info('funded');
+    logger.info("funded");
   });
 });

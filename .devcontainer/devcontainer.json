@@ -6,10 +6,7 @@
       "version": "22"
     }
   },
-  "forwardPorts": [
-    5173,
-    6300
-  ],
+  "forwardPorts": [5173, 6300],
   "customizations": {
     "vscode": {
       "extensions": [

@@ -18,8 +18,8 @@ export const MidnightWallet = () => {
   const [screen] = useState("main");
   const { hasConnectedWallet } = useAssets();
 
-  return (    
-      <Dialog open={open} onOpenChange={setOpen}>
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
       <div>
         {!hasConnectedWallet ? (
           <DialogTrigger asChild>
@@ -40,7 +40,7 @@ export const MidnightWallet = () => {
         {screen == "main" && <ScreenMain setOpen={setOpen} />}
         <Footer />
       </DialogContent>
-    </Dialog>    
+    </Dialog>
   );
 };
 
@@ -49,9 +49,7 @@ interface HeaderProps {
   setScreen: (screen: string) => void;
 }
 
-function Header({
-  screen,
-}: Omit<HeaderProps, 'setScreen'>) {
+function Header({ screen }: Omit<HeaderProps, "setScreen">) {
   return (
     <DialogHeader>
       <DialogTitle className="flex justify-between">

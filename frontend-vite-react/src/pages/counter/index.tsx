@@ -7,11 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { ModeToggle } from "@/components/mode-toggle";
 
 export const Counter = () => {
-  const { deployedContractAPI, derivedState, onDeploy, providers } =
-    useContractSubscription();
-  const [deployedAddress, setDeployedAddress] = useState<string | undefined>(
-    undefined
-  );
+  const { deployedContractAPI, derivedState, onDeploy, providers } = useContractSubscription();
+  const [deployedAddress, setDeployedAddress] = useState<string | undefined>(undefined);
   const [appLoading, setAppLoading] = useState(true);
 
   useEffect(() => {
@@ -38,7 +35,9 @@ export const Counter = () => {
         <div className="flex justify-between items-center mb-8">
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-bold text-foreground mb-2">Counter Contract</h1>
-            <p className="text-xl text-muted-foreground">Interact with the counter smart contract</p>
+            <p className="text-xl text-muted-foreground">
+              Interact with the counter smart contract
+            </p>
           </div>
           <div className="hidden md:block">
             <ModeToggle />
@@ -66,7 +65,9 @@ export const Counter = () => {
 
               {deployedAddress && (
                 <div className="p-4 bg-muted rounded-lg">
-                  <p className="text-sm font-medium text-muted-foreground mb-1">Deployed Contract</p>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">
+                    Deployed Contract
+                  </p>
                   <p className="text-sm font-mono break-all">{deployedAddress}</p>
                 </div>
               )}
@@ -75,25 +76,33 @@ export const Counter = () => {
                 <Card>
                   <CardContent className="pt-6">
                     <p className="text-sm font-medium text-muted-foreground mb-1">Counter Value</p>
-                    <p className="text-2xl font-bold">{derivedState?.round || '0'}</p>
+                    <p className="text-2xl font-bold">{derivedState?.round || "0"}</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
                     <p className="text-sm font-medium text-muted-foreground mb-1">Private Data</p>
-                    <p className="text-2xl font-bold">{derivedState?.privateState.privateCounter || '0'}</p>
+                    <p className="text-2xl font-bold">
+                      {derivedState?.privateState.privateCounter || "0"}
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
                     <p className="text-sm font-medium text-muted-foreground mb-1">Turns</p>
-                    <p className="text-sm font-mono break-all">{derivedState?.turns.increment || 'idle'}</p>
+                    <p className="text-sm font-mono break-all">
+                      {derivedState?.turns.increment || "idle"}
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Contract Address</p>
-                    <p className="text-sm font-mono break-all">{deployedContractAPI?.deployedContractAddress || 'Not deployed'}</p>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                      Contract Address
+                    </p>
+                    <p className="text-sm font-mono break-all">
+                      {deployedContractAPI?.deployedContractAddress || "Not deployed"}
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -112,7 +121,9 @@ export const Counter = () => {
 
               {providers?.flowMessage && (
                 <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                  <p className="text-sm font-medium text-blue-600 dark:text-blue-400">{providers.flowMessage}</p>
+                  <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                    {providers.flowMessage}
+                  </p>
                 </div>
               )}
             </div>

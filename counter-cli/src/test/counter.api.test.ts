@@ -1,17 +1,17 @@
-import { type Resource } from '@midnight-ntwrk/wallet';
-import { type Wallet } from '@midnight-ntwrk/wallet-api';
-import path from 'path';
-import * as api from '../api';
-import { type CounterProviders } from '../common-types';
-import { currentDir } from '../config';
-import { createLogger } from '../logger-utils';
-import { TestEnvironment } from './simulators/test-environment';
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { type Resource } from "@midnight-ntwrk/wallet";
+import { type Wallet } from "@midnight-ntwrk/wallet-api";
+import path from "path";
+import * as api from "../api";
+import { type CounterProviders } from "../common-types";
+import { currentDir } from "../config";
+import { createLogger } from "../logger-utils";
+import { TestEnvironment } from "./simulators/test-environment";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
-const logDir = path.resolve(currentDir, '..', 'logs', 'tests', `${new Date().toISOString()}.log`);
+const logDir = path.resolve(currentDir, "..", "logs", "tests", `${new Date().toISOString()}.log`);
 const logger = await createLogger(logDir);
 
-describe('API', () => {
+describe("API", () => {
   let testEnvironment: TestEnvironment;
   let wallet: Wallet & Resource;
   let providers: CounterProviders;
@@ -24,7 +24,7 @@ describe('API', () => {
       wallet = await testEnvironment.getWallet();
       providers = await api.configureProviders(wallet, testConfiguration.dappConfig);
     },
-    1000 * 60 * 45,
+    1000 * 60 * 45
   );
 
   afterAll(async () => {
@@ -32,7 +32,7 @@ describe('API', () => {
     await testEnvironment.shutdown();
   });
 
-  it('should deploy the contract and increment the counter [@slow]', async () => {
+  it("should deploy the contract and increment the counter [@slow]", async () => {
     const counterContract = await api.deploy(providers, { privateCounter: 0 });
     expect(counterContract).not.toBeNull();
 
