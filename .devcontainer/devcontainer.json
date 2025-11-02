@@ -1,0 +1,23 @@
+{
+  "name": "Midnight Starter Template",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:lts",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [
+    5173,
+    6300
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Prisma.prisma",
+        "tailwindcss.vscode-tailwindcss"
+      ]
+    }
+  },
+  "postCreateCommand": "chmod +x .devcontainer/setup.sh && .devcontainer/setup.sh",
+  "remoteUser": "node"
+}
