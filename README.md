@@ -15,8 +15,16 @@ A starter template for building on Midnight Network with React frontend and smar
 ### 1️⃣ Install Git LFS
 
 ```bash
-# Install and initialize Git LFS
-sudo dnf install git-lfs  # For Fedora/RHEL
+# macOS (Homebrew)
+brew install git-lfs
+git lfs install
+
+# Linux (Fedora/RHEL)
+sudo dnf install git-lfs
+git lfs install
+
+# Linux (Debian/Ubuntu)
+sudo apt-get install git-lfs
 git lfs install
 ```
 
@@ -63,12 +71,10 @@ compact check  # Should show latest version
 ### Testnet Network
 
 1. **Set Network ID**
-
    - Open `frontend-vite-react/src/App.tsx`
    - Ensure `setNetworkId(NetworkId.TestNet)` is set
 
 2. **Configure Contract Address**
-
    - In the same file, locate the `contractAddress` constant
    - Replace with a Counter Testnet-network contract address
 
@@ -83,12 +89,10 @@ compact check  # Should show latest version
 ### Undeployed/Local Network
 
 1. **Configure Your own wallet Address**
-
    - Open `counter-cli/src/scripts/prepare-standalone.test.ts`
    - Replace with your own undeployed-network wallet address
 
 2. **Set Network ID**
-
    - Open `frontend-vite-react/src/App.tsx`
    - Change to `setNetworkId(NetworkId.Undeployed)`
 
