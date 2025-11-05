@@ -1,7 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { Wallet, PlusCircle } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+import { PlusCircle, Wallet } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * Home コンポーネント
+ * @returns
+ */
 export function Home() {
   const navigate = useNavigate();
 
@@ -25,7 +29,9 @@ export function Home() {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl font-bold text-foreground mb-2">Midnight Starter Template</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">
+              Midnight Starter Template
+            </h1>
             <p className="text-xl text-muted-foreground">
               Explore our implementations and features
             </p>
@@ -43,8 +49,12 @@ export function Home() {
                 <div className="flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
                   {item.icon}
                 </div>
-                <h2 className="text-2xl font-semibold text-foreground mb-2">{item.title}</h2>
-                <p className="text-muted-foreground mb-6 flex-grow">{item.description}</p>
+                <h2 className="text-2xl font-semibold text-foreground mb-2">
+                  {item.title}
+                </h2>
+                <p className="text-muted-foreground mb-6 flex-grow">
+                  {item.description}
+                </p>
                 <button
                   className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-200 flex items-center justify-center gap-2"
                   onClick={() => navigate(item.path)}
@@ -76,7 +86,9 @@ export function Home() {
           </p>
 
           <div className="flex flex-col items-center justify-center space-y-1">
-            <p className="text-xs text-muted-foreground tracking-wider mb-3">POWERED BY</p>
+            <p className="text-xs text-muted-foreground tracking-wider mb-3">
+              POWERED BY
+            </p>
             <div className="flex items-center justify-center gap-5">
               <a
                 href="https://meshjs.dev"
@@ -98,7 +110,9 @@ export function Home() {
                   style={{ width: "auto" }}
                 />
               </a>
-              <div className="text-lg font-light text-muted-foreground opacity-50">×</div>
+              <div className="text-lg font-light text-muted-foreground opacity-50">
+                ×
+              </div>
               <a
                 href="https://eddalabs.io"
                 target="_blank"

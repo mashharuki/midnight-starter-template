@@ -1,14 +1,27 @@
 import { Loading } from "@/components/loading";
-import { useContractSubscription } from "@/modules/midnight/counter-ui";
-import { useEffect, useState } from "react";
-import { RefreshCw, PlusCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useContractSubscription } from "@/modules/midnight/counter-ui";
+import { PlusCircle, RefreshCw } from "lucide-react";
+import { useEffect, useState } from "react";
 
+/**
+ * Counter コントラクト
+ * @returns
+ */
 export const Counter = () => {
-  const { deployedContractAPI, derivedState, onDeploy, providers } = useContractSubscription();
-  const [deployedAddress, setDeployedAddress] = useState<string | undefined>(undefined);
+  const { deployedContractAPI, derivedState, onDeploy, providers } =
+    useContractSubscription();
+  const [deployedAddress, setDeployedAddress] = useState<string | undefined>(
+    undefined
+  );
   const [appLoading, setAppLoading] = useState(true);
 
   useEffect(() => {
@@ -17,11 +30,18 @@ export const Counter = () => {
     }
   }, [derivedState?.round]);
 
+  /**
+   * 新しくコントラクトをデプロイする
+   */
   const deployNew = async () => {
+    // コントラクトをデプロイする
     const { address } = await onDeploy();
     setDeployedAddress(address);
   };
 
+  /**
+   * コントラクトのincrementメソッドを呼び出す
+   */
   const increment = async () => {
     if (deployedContractAPI) {
       await deployedContractAPI.increment();
@@ -34,7 +54,9 @@ export const Counter = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl font-bold text-foreground mb-2">Counter Contract</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">
+              Counter Contract
+            </h1>
             <p className="text-xl text-muted-foreground">
               Interact with the counter smart contract
             </p>
@@ -68,20 +90,28 @@ export const Counter = () => {
                   <p className="text-sm font-medium text-muted-foreground mb-1">
                     Deployed Contract
                   </p>
-                  <p className="text-sm font-mono break-all">{deployedAddress}</p>
+                  <p className="text-sm font-mono break-all">
+                    {deployedAddress}
+                  </p>
                 </div>
               )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 <Card>
                   <CardContent className="pt-6">
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Counter Value</p>
-                    <p className="text-2xl font-bold">{derivedState?.round || "0"}</p>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                      Counter Value
+                    </p>
+                    <p className="text-2xl font-bold">
+                      {derivedState?.round || "0"}
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Private Data</p>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                      Private Data
+                    </p>
                     <p className="text-2xl font-bold">
                       {derivedState?.privateState.privateCounter || "0"}
                     </p>
@@ -89,7 +119,9 @@ export const Counter = () => {
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
-                    <p className="text-sm font-medium text-muted-foreground mb-1">Turns</p>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                      Turns
+                    </p>
                     <p className="text-sm font-mono break-all">
                       {derivedState?.turns.increment || "idle"}
                     </p>
@@ -101,7 +133,8 @@ export const Counter = () => {
                       Contract Address
                     </p>
                     <p className="text-sm font-mono break-all">
-                      {deployedContractAPI?.deployedContractAddress || "Not deployed"}
+                      {deployedContractAPI?.deployedContractAddress ||
+                        "Not deployed"}
                     </p>
                   </CardContent>
                 </Card>

@@ -1,26 +1,27 @@
 import {
   ContractDeployment,
-  useProviders,
-  useDeployedContracts,
   ContractFollow,
+  useDeployedContracts,
+  useProviders,
 } from "@/modules/midnight/counter-ui";
-import { DerivedState } from "../api/common-types";
-import { useCallback, useEffect, useState } from "react";
-import { ContractControllerInterface } from "../api/contractController";
 import { useAssets } from "@meshsdk/midnight-react";
+import { useCallback, useEffect, useState } from "react";
 import { Observable } from "rxjs";
+import { DerivedState } from "../api/common-types";
+import { ContractControllerInterface } from "../api/contractController";
 
 export const useContractSubscription = () => {
   const { hasConnectedWallet } = useAssets();
   const providers = useProviders();
   const deploy = useDeployedContracts();
 
-  const [counterDeploymentObservable, setCounterDeploymentObservable] = useState<
-    Observable<ContractDeployment> | undefined
-  >(undefined);
+  const [counterDeploymentObservable, setCounterDeploymentObservable] =
+    useState<Observable<ContractDeployment> | undefined>(undefined);
 
-  const [contractDeployment, setContractDeployment] = useState<ContractDeployment>();
-  const [deployedContractAPI, setDeployedContractAPI] = useState<ContractControllerInterface>();
+  const [contractDeployment, setContractDeployment] =
+    useState<ContractDeployment>();
+  const [deployedContractAPI, setDeployedContractAPI] =
+    useState<ContractControllerInterface>();
   const [derivedState, setDerivedState] = useState<DerivedState>();
 
   const onDeploy = async (): Promise<ContractFollow> => {
@@ -42,7 +43,9 @@ export const useContractSubscription = () => {
     if (!counterDeploymentObservable) {
       return;
     }
-    const subscription = counterDeploymentObservable.subscribe(setContractDeployment);
+    const subscription = counterDeploymentObservable.subscribe(
+      setContractDeployment
+    );
 
     return () => {
       subscription.unsubscribe();
@@ -54,7 +57,10 @@ export const useContractSubscription = () => {
       return;
     }
 
-    if (contractDeployment.status === "in-progress" || contractDeployment.status === "failed") {
+    if (
+      contractDeployment.status === "in-progress" ||
+      contractDeployment.status === "failed"
+    ) {
       return;
     }
     setDeployedContractAPI((prev) => prev || contractDeployment.api);
@@ -62,7 +68,8 @@ export const useContractSubscription = () => {
 
   useEffect(() => {
     if (deployedContractAPI) {
-      const subscriptionDerivedState = deployedContractAPI.state$.subscribe(setDerivedState);
+      const subscriptionDerivedState =
+        deployedContractAPI.state$.subscribe(setDerivedState);
       return () => {
         subscriptionDerivedState.unsubscribe();
       };

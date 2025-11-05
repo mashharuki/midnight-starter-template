@@ -1,5 +1,9 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
+/**
+ * MainLayoutコンポーネント
+ * @returns
+ */
 export const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col">
