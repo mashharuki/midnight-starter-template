@@ -128,3 +128,8 @@
 - midnightntwrk/midnight-js
 - midnightntwrk/compact
 - midnightntwrk/midnight-awesome-dapps
+
+## Compact に関する参考情報
+
+- `docs/compact`フォルダ配下に compact の仕様に関するマークダウンファイルが格納されています。
+- compact に関する実装を行う際は必要に応じてコンテキストとして取り込んでください。
