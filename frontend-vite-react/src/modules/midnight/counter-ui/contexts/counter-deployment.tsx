@@ -6,7 +6,7 @@ import type { DeployedAPIProvider } from "./counter-deployment-class";
 import { useLocalState } from "../hooks/use-localStorage";
 import { DeployedTemplateManager } from "./counter-deployment-class";
 import { useProviders } from "../hooks";
-import { ContractAddress } from "@midnight-ntwrk/compact-runtime";
+import type { ContractAddress } from "@midnight-ntwrk/compact-runtime";
 
 export const DeployedProviderContext = createContext<DeployedAPIProvider | undefined>(undefined);
 

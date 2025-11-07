@@ -2,7 +2,7 @@ import { DeployedProvider } from "./counter-deployment";
 import { LocalStorageProvider } from "./counter-localStorage";
 import { Provider } from "./counter-providers";
 import { Logger } from "pino";
-import { ContractAddress } from "@midnight-ntwrk/compact-runtime";
+import type { ContractAddress } from "@midnight-ntwrk/compact-runtime";
 
 export * from "./counter-providers";
 export * from "./counter-localStorage";

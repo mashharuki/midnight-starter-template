@@ -79,12 +79,17 @@ compact check  # Should show latest version
    - Replace with a Counter Testnet-network contract address
 
 3. **Start Development**
+
    ```bash
    # In one terminal (from project root)
    pnpm install
    pnpm run build
    pnpm run start-app-testnet
    ```
+
+   このコマンドを実行することで以下の2つのアプリ、サーバーが起動する
+   - midnightnetwork/proof-server:4.0.0
+   - フロントエンドアプリ
 
 ### Undeployed/Local Network
 
