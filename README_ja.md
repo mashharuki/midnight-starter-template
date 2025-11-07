@@ -1,7 +1,7 @@
 # 🚀 MESH - Midnight スターターテンプレート
 
 Midnight Network 上で React フロントエンドとスマートコントラクト連携を構築するためのスターターテンプレートです。
-![Midnight Starter Template](./starter-template-optimized.png)
+![Midnight Starter Template](./docs/starter-template-optimized.png)
 
 ## 📦 前提条件
 
