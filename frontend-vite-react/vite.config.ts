@@ -40,6 +40,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
+    exclude: [
+      "@midnight-ntwrk/compact-runtime",
+      "@midnight-ntwrk/onchain-runtime",
+    ],
     esbuildOptions: {
       // Node.js global to browser globalThis
       define: {
