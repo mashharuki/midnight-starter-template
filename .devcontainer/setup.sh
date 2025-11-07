@@ -1,5 +1,7 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+
+PNPM_VERSION="9.12.3"
 
 echo "Starting devcontainer setup..."
 
@@ -12,7 +14,7 @@ echo "Ensuring git-lfs is installed..."
 if ! command -v git-lfs &> /dev/null; then
     sudo apt-get install -y git-lfs
 fi
-git lfs install
+git lfs install || echo "Warning: git-lfs install command failed"
 
 # Install compact
 echo "Installing compact..."
@@ -29,7 +31,9 @@ if ! command -v compact &> /dev/null; then
 fi
 # Only update if compact was successfully installed
 if command -v compact &> /dev/null; then
-    compact update 0.25.0
+    if ! compact update 0.25.0; then
+        echo "Warning: compact update failed"
+    fi
 fi
 
 # Install uv
@@ -40,7 +44,16 @@ fi
 
 # Enable pnpm
 echo "Enabling pnpm..."
-corepack enable pnpm
+if command -v corepack &> /dev/null; then
+    corepack enable pnpm || echo "Warning: corepack enable pnpm failed"
+    if ! corepack prepare "pnpm@${PNPM_VERSION}" --activate; then
+        echo "Falling back to npm global install for pnpm"
+        npm install -g "pnpm@${PNPM_VERSION}"
+    fi
+else
+    echo "corepack not found, installing pnpm via npm"
+    npm install -g "pnpm@${PNPM_VERSION}"
+fi
 
 # Install dependencies
 echo "Installing project dependencies..."
