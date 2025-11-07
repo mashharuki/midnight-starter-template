@@ -17,6 +17,26 @@ export default defineConfig(({ mode }) => ({
     global: "globalThis",
   },
   plugins: [
+    {
+      name: "counter-contract-cjs-transform",
+      enforce: "pre",
+      async transform(code, id) {
+        if (
+          /counter-contract[\\/](dist|src)[\\/]managed[\\/].*index\.cjs(?:\?import)?$/.test(
+            id
+          )
+        ) {
+          const { transform } = await import("esbuild");
+          const result = await transform(code, {
+            loader: "js",
+            format: "esm",
+            target: "es2020",
+          });
+          return result.code;
+        }
+        return undefined;
+      },
+    },
     nodePolyfills({
       // To add only specific polyfills, add them here.
       // If no specific polyfills are needed, you can leave this empty.
@@ -28,16 +48,33 @@ export default defineConfig(({ mode }) => ({
     }),
     wasm(),
     react(),
-    viteCommonjs(),
+    viteCommonjs({
+      include: [
+        "node_modules/@midnight-ntwrk/compact-runtime/dist/runtime.js",
+        "node_modules/.pnpm/@midnight-ntwrk+compact-runtime@*/node_modules/@midnight-ntwrk/compact-runtime/dist/runtime.js",
+        "../counter-contract/dist/managed/**/*.cjs",
+        "../counter-contract/src/managed/**/*.cjs",
+      ],
+    }),
     topLevelAwait(),
     tailwindcss(),
   ],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "isomorphic-ws": path.resolve(__dirname, "./src/shims/isomorphic-ws.ts"),
+    alias: [
+      {
+        find: /^@midnight-ntwrk\/compact-runtime$/,
+        replacement: path.resolve(__dirname, "./src/shims/compact-runtime.ts"),
+      },
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "./src"),
+      },
+      {
+        find: "isomorphic-ws",
+        replacement: path.resolve(__dirname, "./src/shims/isomorphic-ws.ts"),
+      },
       // Add any other aliases you need
-    },
+    ],
   },
   optimizeDeps: {
     exclude: [
